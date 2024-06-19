@@ -24,10 +24,10 @@ export const ExpenseList = () => {
                 Lista de gastos:
               </p>
               {
-                filteredExpenses.map(expense => (
+                filteredExpenses.map((expense, index) => (
                   <>
                     <ExpenseCard
-                      key={expense.id}
+                      key={index}
                       id={expense.id}
                       name={expense.expenseName}
                       category={expense.category}

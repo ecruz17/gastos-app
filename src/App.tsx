@@ -1,5 +1,5 @@
 import { useBudget } from "./hooks/useBudget"
-import { BudgetForm, BudgetTracker, ExpenseList, FilterCategory } from "./components";
+import { BudgetForm, BudgetTracker, ExpenseList, FilterCategory, Header } from "./components";
 import { useEffect, useMemo } from 'react';
 import ExpenseModal from "./components/ExpenseModal";
 
@@ -15,14 +15,10 @@ function App() {
   
 
   return (
-    <div className="bg-slate-100 h-[100vh]">
-      <header className="bg-blue-500 fixed w-full p-8 shadow-md">
-        <h1 className="uppercase text-4xl text-white font-black text-center">
-          Planificador de Gastos - App
-        </h1>
-      </header>
+    <div className="bg-[#f0f0f0] h-[100vh]">
+      <Header />
 
-      <div className="pt-48 bg-slate-white">
+      <div className="pt-48 bg-[#f0f0f0]">
         <div className="max-w-3xl mx-4 md:mx-auto bg-white shadow-lg rounded-lg p-10"> 
           {
             isValidBudget
@@ -33,11 +29,11 @@ function App() {
         {
           isValidBudget &&
           (
-            <main className="max-w-3xl mx-auto py-10">
+            <div className="max-w-3xl mx-auto py-10">
               <FilterCategory />
               <ExpenseList /> 
               <ExpenseModal />
-            </main>
+            </div>
           )
           }
       </div>
