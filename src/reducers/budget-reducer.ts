@@ -5,18 +5,22 @@ import { Category } from '../types/Category';
 export type BudgetActions =
   { type: 'add-budget', payload: { budget: number } } |
   { type: 'show-modal' } |
+  { type: 'show-budget-modal' } |
   { type: 'hide-modal' } |
+  { type: 'hide-budget-modal' } |
   { type: 'add-expense', payload: { expense: DraftExpense } } |
   { type: 'remove-expense', payload: { id: Expense['id'] } } |
   { type: 'get-expense-by-id', payload: { id: Expense['id'] } } |
   { type: 'edit-expense', payload: { expense: Expense } } |
   { type: 'reset-app' } |
-  { type: 'add-category-filter', payload: {id: Category['id'] } }
+  { type: 'add-category-filter', payload: { id: Category['id'] } } |
+  { type: 'edit-budget', payload: { budget: number } }
 
 
 export type BudgetState = {
   budget: number,
   modal: boolean,
+  budgetModal: boolean,
   expenses: Expense[],
   editingId: Expense['id'],
   currentCategory: Category['id']
@@ -35,6 +39,7 @@ const localStorageExpenses = (): Expense[] => {
 export const initialState: BudgetState = {
   budget: initialBudget(),
   modal: false,
+  budgetModal: false,
   expenses: localStorageExpenses(),
   editingId: '',
   currentCategory: ''
@@ -58,11 +63,20 @@ export const budgetReducer = (
       budget: action.payload.budget
     }
   }
+  
+  if (action.type === 'edit-budget') {
+    return {
+      ...state,
+      budget: action.payload.budget,
+      budgetModal: false
+    }
+  }
 
   if (action.type === 'show-modal') {
     return {
       ...state,
-      modal: true
+      modal: true,
+      budgetModal: false
     }
   }
 
@@ -71,6 +85,21 @@ export const budgetReducer = (
       ...state,
       modal: false,
       editingId: ''
+    }
+  }
+
+  if (action.type === 'show-budget-modal') {
+    return {
+      ...state,
+      budgetModal: true,
+      modal: false
+    }
+  }
+
+  if (action.type === 'hide-budget-modal') {
+    return {
+      ...state,
+      budgetModal: false,
     }
   }
 

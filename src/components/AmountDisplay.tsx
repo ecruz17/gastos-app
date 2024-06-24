@@ -8,7 +8,7 @@ type AmountDisplayProps = {
 
 const AmountDisplay = ({ amount, label, isOverbudget = false }: AmountDisplayProps) => {
   return (
-    <p className={`text-2xl text-blue-500 font-bold`}>
+    <p className={`text-lg md:text-2xl text-blue-500 font-bold`}>
       {label && `${label}: `}
       <span className={`${isOverbudget ? 'text-red-500' : 'text-black'}`}>
         {formatCurrency(amount)}
